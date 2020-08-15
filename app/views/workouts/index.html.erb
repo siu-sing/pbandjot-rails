@@ -22,9 +22,12 @@
         <td><%= workout.description %></td>
         <td><%= workout.prescribed_male %></td>
         <td><%= workout.prescribed_female %></td>
-        <td><%= link_to 'Show', workout %></td>
+        <td><%= link_to 'Add new entry', new_workout_record_path(workout) %></td>
+        <td><%= %></td>
+        <td><%= %></td>
+        <!-- <td><%= link_to 'Show', workout %></td>
         <td><%= link_to 'Edit', edit_workout_path(workout) %></td>
-        <td><%= link_to 'Destroy', workout, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Destroy', workout, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +35,4 @@
 
 <br>
 
-<%= link_to 'New Workout', new_workout_path %>
+<!-- <%= link_to 'New Workout', new_workout_path %> -->
