@@ -10,20 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_15_080837) do
+ActiveRecord::Schema.define(version: 2020_08_15_124147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "records", force: :cascade do |t|
-    t.string "pb_weight"
-    t.interval "pb_time"
+    t.integer "pb_weight"
+    t.time "pb_time"
     t.date "pb_date"
     t.text "notes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.bigint "workout_id", null: false
+    t.integer "pb_time_min"
+    t.integer "pb_time_sec"
     t.index ["user_id"], name: "index_records_on_user_id"
     t.index ["workout_id"], name: "index_records_on_workout_id"
   end

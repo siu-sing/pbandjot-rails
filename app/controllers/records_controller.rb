@@ -15,6 +15,7 @@ class RecordsController < ApplicationController
   # GET /records/new
   def new
     @record = Record.new
+    @workout = Workout.find(params[:workout_id])
   end
 
   # GET /records/1/edit
@@ -24,16 +25,15 @@ class RecordsController < ApplicationController
   # POST /records
   # POST /records.json
   def create
-    @record = Record.new(record_params)
+    # puts "@@@"
+    # # puts params[:workout_id]
+    # @record = Record.new(record_params)
+    @workout = Workout.find(params[:workout_id])
+    @record = @workout.records.build(record_params)
+    @record["user_id"] = current_user.id
 
-    respond_to do |format|
-      if @record.save
-        format.html { redirect_to @record, notice: 'Record was successfully created.' }
-        format.json { render :show, status: :created, location: @record }
-      else
-        format.html { render :new }
-        format.json { render json: @record.errors, status: :unprocessable_entity }
-      end
+    if @record.save
+      redirect_to workouts_path
     end
   end
 
@@ -42,7 +42,7 @@ class RecordsController < ApplicationController
   def update
     respond_to do |format|
       if @record.update(record_params)
-        format.html { redirect_to @record, notice: 'Record was successfully updated.' }
+        format.html { redirect_to @record, notice: "Record was successfully updated." }
         format.json { render :show, status: :ok, location: @record }
       else
         format.html { render :edit }
@@ -56,19 +56,20 @@ class RecordsController < ApplicationController
   def destroy
     @record.destroy
     respond_to do |format|
-      format.html { redirect_to records_url, notice: 'Record was successfully destroyed.' }
+      format.html { redirect_to records_url, notice: "Record was successfully destroyed." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_record
-      @record = Record.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def record_params
-      params.require(:record).permit(:pb_weight, :pb_time, :pb_date, :notes)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_record
+    @record = Record.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def record_params
+    params.require(:record).permit(:pb_weight, :pb_time, :pb_date, :notes, :workout_id, :pb_time_min, :pb_time_sec)
+  end
 end
