@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Workout name:</strong>
+  <%= @workout.workout_name %>
+</p>
+
+<p>
+  <strong>Workout type:</strong>
+  <%= @workout.workout_type %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @workout.description %>
+</p>
+
+<p>
+  <strong>Prescribed male:</strong>
+  <%= @workout.prescribed_male %>
+</p>
+
+<p>
+  <strong>Prescribed female:</strong>
+  <%= @workout.prescribed_female %>
+</p>
+
+<%= link_to 'Edit', edit_workout_path(@workout) %> |
+<%= link_to 'Back', workouts_path %>

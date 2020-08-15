@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pb weight:</strong>
+  <%= @record.pb_weight %>
+</p>
+
+<p>
+  <strong>Pb time:</strong>
+  <%= @record.pb_time %>
+</p>
+
+<p>
+  <strong>Pb date:</strong>
+  <%= @record.pb_date %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @record.notes %>
+</p>
+
+<%= link_to 'Edit', edit_record_path(@record) %> |
+<%= link_to 'Back', records_path %>
