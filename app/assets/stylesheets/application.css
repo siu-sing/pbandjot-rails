@@ -9,7 +9,16 @@
  * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
- *
+ *= require bootstrap
  *= require_tree .
  *= require_self
  */
+
+body {
+    background-color: #000000;
+}
+
+.navbar-custom {
+    /* background-color: #FFD51F !important; */
+    background-image: linear-gradient(to bottom right, #FFD51F 50%, #F9C430 50% );
+}
