@@ -6,28 +6,64 @@
 	<%= link_to('Add new entry', workouts_path) %>
 </li>
 <% else %>
-<li>
-	<%= link_to('Login', new_user_session_path) %>
-</li>
-<li>
-	<%= link_to('Sign Up', new_user_registration_path) %>
-</li>
+<div class="row m-3 mt-5 my-1">
+    <div class="col-md-4 mx-auto square text-center">
+        <img class="landing__logo my-3" src="/logo.svg"alt="">
+        <div class="landing__title display-3 mb-3">PB & Jot</div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 mx-auto landing__text text-center">
+        <div>
+            Record Your Personal Bests
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 mx-auto text-center mt-2">
+        <div class="row">
+            <div class="col">
+                <%= link_to('Login', new_user_session_path) %>
+            </div>
+            <div class="col">
+                <%= link_to('Sign Up', new_user_registration_path) %>
+            </div>
+        </div>
+        <div>
+            
+            
+        </div>
+    </div>
+</div>
+
+
 <% end %>
 
 <% if user_signed_in? %>
 <% @records.each do |r| %>
-<a href="#">
+<a class="record__display" href="#">
 	<div class="row my-1">
-		<div class="col-md-6 border border-warning text-center">
-			<%= r.workout.workout_name %> |
-			<% case r.workout.workout_type %>
-			<% when 'weightlifting' %>
-			<%= r.pb_weight %>lb |
-			<% when 'benchmark' %>
-			<%= r.pb_time_min %>:<%= r.pb_time_sec.to_s.rjust(2,"0") %> |
-			<% end %>
-			<%= r.pb_date %>
-			<% if r.prescribed? %> <%= "Rx" %> <% end %>
+		<div class="col-md-4 border border-warning mx-auto">
+
+            <div class="row">
+                <div class="col"><%= r.workout.workout_name %>
+                    <% if r.prescribed? %> <%= "*Rx" %> <% end %>
+                </div>
+                <div class="col">
+                    <%= r.pb_date %>
+                </div>
+                <div class="col text-right">
+                    <% case r.workout.workout_type %>
+                    <% when 'weightlifting' %>
+                    <%= r.pb_weight %>lb
+                    <% when 'benchmark' %>
+                    <%= r.pb_time_min %>:<%= r.pb_time_sec.to_s.rjust(2,"0") %>
+                    <% end %>
+                </div>
+            </div>
+
+            
+			
 		</div>
 	</div>
 </a>

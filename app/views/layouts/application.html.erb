@@ -7,7 +7,8 @@
 	<%= csp_meta_tag %>
 
 	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-	<%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@700&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -20,8 +21,9 @@
 	<p class="alert alert alert-danger" style="margin:0;"><%= alert %></p>
 	<% end %>
 
-	<!-- Nav Bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
+    <!-- Nav Bar -->
+    <% if user_signed_in? %>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-custom">
         <a class="navbar-brand" href="/">
             <img src="/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="">
             PBandJot
@@ -52,8 +54,8 @@
 			</ul>
 		</div>
 	</nav>
-
-
+    <% end %>
+	
 	<div class="container">
 		<%= yield %>
 	</div>
