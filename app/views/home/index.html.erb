@@ -1,20 +1,35 @@
-THIS IS HOME
-
 <% if user_signed_in? %>
-<div>Signed in as @<%= current_user.username %></div>
 <li>
-    <%= link_to('Edit Account', edit_user_registration_path) %>
+	<%= link_to('Edit Account', edit_user_registration_path) %>
 </li>
 <li>
-    <%= link_to('Add new entry', workouts_path) %>
+	<%= link_to('Add new entry', workouts_path) %>
 </li>
 <% else %>
 <li>
-    <%= link_to('Login', new_user_session_path) %>
+	<%= link_to('Login', new_user_session_path) %>
 </li>
 <li>
-    <%= link_to('Sign Up', new_user_registration_path) %>
+	<%= link_to('Sign Up', new_user_registration_path) %>
 </li>
 <% end %>
 
-
+<% if user_signed_in? %>
+<% @records.each do |r| %>
+<a href="#">
+	<div class="row my-1">
+		<div class="col-md-6 border border-warning text-center">
+			<%= r.workout.workout_name %> |
+			<% case r.workout.workout_type %>
+			<% when 'weightlifting' %>
+			<%= r.pb_weight %>lb |
+			<% when 'benchmark' %>
+			<%= r.pb_time_min %>:<%= r.pb_time_sec.to_s.rjust(2,"0") %> |
+			<% end %>
+			<%= r.pb_date %>
+			<% if r.prescribed? %> <%= "Rx" %> <% end %>
+		</div>
+	</div>
+</a>
+<% end %>
+<% end %>

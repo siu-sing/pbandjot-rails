@@ -1,0 +1,12 @@
+rails new pbandjot -d postgresql
+
+rails g scaffold records pb_weight:string pb_time:interval pb_date:date notes:text
+rails g scaffold workouts workout_name:string workout_type:string description:text prescribed_male:string prescribed_female:string
+rails generate devise:install
+rails g devise User
+
+rails g migration AddToUserToRecords user:references
+rails g migration AddToWorkoutToRecords workout:references
+rails g migration AddToUsernameToRecords user:references
+rails g controller users index show destroy update new
+rails g migration AddColumnToUser username:string
