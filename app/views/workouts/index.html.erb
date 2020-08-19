@@ -1,38 +1,52 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+	<div class="row">
+		<div class="col-md-6 mx-auto">
 
-<h1>Workouts</h1>
+			<div class="row my-2">
+				<div class="col text-center landing__text">
+					<h2>Weightlifting</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<% @records_weightlifting.each do |record| %>
+					<div class="card my-1">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<div><%= record.workout.workout_name %></div>
+								</div>
+								<div class="col text-right"><%= record.pb_weight %>lb</div>
+							</div>
+						</div>
+					</div>
+					<% end %>
+				</div>
+			</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Workout name</th>
-      <th>Workout type</th>
-      <th>Description</th>
-      <th>Prescribed male</th>
-      <th>Prescribed female</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+			<div class="row my-2">
+				<div class="col text-center landing__text">
+					<h2>Benchmark Workouts</h2>
+				</div>
+			</div>
 
-  <tbody>
-    <% @workouts.each do |workout| %>
-      <tr>
-        <td><%= workout.workout_name %></td>
-        <td><%= workout.workout_type %></td>
-        <td><%= workout.description %></td>
-        <td><%= workout.prescribed_male %></td>
-        <td><%= workout.prescribed_female %></td>
-        <td><%= link_to 'Add new entry', new_workout_record_path(workout) %></td>
-        <td><%= %></td>
-        <td><%= %></td>
-        <!-- <td><%= link_to 'Show', workout %></td>
-        <td><%= link_to 'Edit', edit_workout_path(workout) %></td>
-        <td><%= link_to 'Destroy', workout, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+			<div class="row">
+				<div class="col">
+					<% @records_benchmark.each do |record| %>
+					<div class="card my-1">
+						<div class="card-body">
+							<div class="row">
+								<div class="col">
+									<div><%= record.workout.workout_name %></div>
+								</div>
+								<div class="col text-right"><%= record.pb_time_min %>:<%= record.pb_time_sec.to_s.rjust(2,"0") %></div>
+							</div>
+						</div>
+					</div>
+					<% end %>
+				</div>
+			</div>
 
-<br>
-
-<!-- <%= link_to 'New Workout', new_workout_path %> -->
+		</div>
+	</div>
+</div>

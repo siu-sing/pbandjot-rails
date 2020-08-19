@@ -40,32 +40,8 @@
 <% end %>
 
 <% if user_signed_in? %>
-<% @records.each do |r| %>
-<a class="record__display" href="#">
-	<div class="row my-1">
-		<div class="col-md-4 border border-warning mx-auto">
-
-            <div class="row">
-                <div class="col"><%= r.workout.workout_name %>
-                    <% if r.prescribed? %> <%= "*Rx" %> <% end %>
-                </div>
-                <div class="col">
-                    <%= r.pb_date %>
-                </div>
-                <div class="col text-right">
-                    <% case r.workout.workout_type %>
-                    <% when 'weightlifting' %>
-                    <%= r.pb_weight %>lb
-                    <% when 'benchmark' %>
-                    <%= r.pb_time_min %>:<%= r.pb_time_sec.to_s.rjust(2,"0") %>
-                    <% end %>
-                </div>
-            </div>
-
-            
-			
-		</div>
-	</div>
-</a>
-<% end %>
+<div class="landing__text">
+    <%= link_to('View your records', user_workouts_path(current_user.id)) %>
+    View your records | Add new records
+</div>
 <% end %>
