@@ -13,6 +13,17 @@ class WorkoutsController < ApplicationController
   # GET /workouts/1.json
   def show
     @user = User.find(params[:user_id])
+    @workout = Workout.find(params[:id])
+
+    puts "%%%%%%%%%%%%%%"
+    puts params[:id]
+    puts "%%%%%%%%%%%%%%"
+
+    @records = Record.where(user_id: params[:user_id], workout_id: params[:id])
+
+    puts "%%%%%%%%%%%%%%"
+    puts @records
+    puts "%%%%%%%%%%%%%%"
   end
 
   # GET /workouts/new

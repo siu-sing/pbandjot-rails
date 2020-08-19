@@ -20,7 +20,8 @@
 
 body {
 	/* background-color: #dcdcdc; */
-	background-color: #000000;
+    background-color: #000000;
+    color: #dcdcdc
 }
 
 .navbar-custom {
@@ -66,7 +67,7 @@ body {
 }
 
 .card {
-    background-color: rgba(213, 213, 213, 0.427);
+    background-color: rgba(213, 213, 213, 0.085);
 }
 
 .card-body {

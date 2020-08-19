@@ -1,1 +1,54 @@
-<%= @user.username %>
+<div class="row">
+    <div class="col-md-6">
+        <div class="row mt-2">
+            <div class="col">
+                <h2><%= @workout.workout_name %></h2>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="col">
+                <%= @workout.description %> <br>
+                <% unless @workout.workout_type == "weightlifting" %>
+                <strong>Rx</strong>
+                M: <%= @workout.prescribed_male %>lb, 
+                F: <%= @workout.prescribed_female %>lb
+                <% end %>
+            </div>
+        </div>
+
+        <div class="row my-3">
+            <div class="col">
+                <% @records.each do |record| %>
+                <% unless @workout.workout_type == "weightlifting" %>
+                    <% if @user.gender == "Male" %>
+                        <% rx_class = record.pb_weight >= @workout.prescribed_male.to_i ? "border border-warning" : "" %>
+                    <% elsif @user.gender == "Female" %>
+                        <% rx_class = record.pb_weight >= @workout.prescribed_female.to_i ? "border border-warning" : "" %>
+                    <% end %>
+                <% end %>
+                <div class="card my-1 <%= rx_class %>">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <%= record.pb_date %>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <% unless @workout.workout_type == "weightlifting" %>
+                                <%= record.pb_time_min %>:<%= record.pb_time_sec.to_s.rjust(2,"0") %>
+                                <% end %>
+                            </div>
+                            <div class="col-md-4 text-right">
+                                <%= record.pb_weight %>lb
+                            </div>
+                        </div>
+                    </div>
+                </div>                     
+                <% end %>
+            </div>
+        </div>
+
+        
+    </div>
+</div>
+
+

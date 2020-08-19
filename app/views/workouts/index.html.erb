@@ -9,17 +9,19 @@
 			</div>
 			<div class="row">
 				<div class="col">
-					<% @records_weightlifting.each do |record| %>
-					<div class="card my-1">
-						<div class="card-body">
-							<div class="row">
-								<div class="col">
-									<div><%= record.workout.workout_name %></div>
-								</div>
-								<div class="col text-right"><%= record.pb_weight %>lb</div>
-							</div>
-						</div>
-					</div>
+                    <% @records_weightlifting.each do |record| %>
+                        <%= link_to user_workout_path(@user.id, record.workout_id) do %>
+                        <div class="card my-1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div><%= record.workout.workout_name %></div>
+                                    </div>
+                                    <div class="col text-right"><%= record.pb_weight %>lb</div>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
 					<% end %>
 				</div>
 			</div>
@@ -32,17 +34,26 @@
 
 			<div class="row">
 				<div class="col">
-					<% @records_benchmark.each do |record| %>
-					<div class="card my-1">
-						<div class="card-body">
-							<div class="row">
-								<div class="col">
-									<div><%= record.workout.workout_name %></div>
-								</div>
-								<div class="col text-right"><%= record.pb_time_min %>:<%= record.pb_time_sec.to_s.rjust(2,"0") %></div>
-							</div>
-						</div>
-					</div>
+                    <% @records_benchmark.each do |record| %>
+                        <% unless record.workout.workout_type == "weightlifting" %>
+                            <% if @user.gender == "Male" %>
+                                <% rx_class = record.pb_weight >= record.workout.prescribed_male.to_i ? "border border-warning" : "" %>
+                            <% elsif @user.gender == "Female" %>
+                                <% rx_class = record.pb_weight >= record.workout.prescribed_female.to_i ? "border border-warning" : "" %>
+                            <% end %>
+                        <% end %>
+                        <%= link_to user_workout_path(@user.id, record.workout_id) do %>
+                        <div class="card my-1 <%= rx_class %>">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <div><%= record.workout.workout_name %></div>
+                                    </div>
+                                    <div class="col text-right"><%= record.pb_time_min %>:<%= record.pb_time_sec.to_s.rjust(2,"0") %></div>
+                                </div>
+                            </div>
+                        </div>
+                        <% end %>
 					<% end %>
 				</div>
 			</div>
